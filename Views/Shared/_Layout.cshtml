@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Clima</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Clima.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+
+                <!-- Botón de cambio de tema -->            
+            <div class="d-flex align-items-center">
+                <div class="theme-toggle">
+                    <input type="checkbox" id="themeToggle" class="d-none" onclick="toggleTheme()">
+                    <label for="themeToggle" class="toggle-label">
+                        <span class="toggle-ball"></span>
+                        <span class="sun">🌞</span>
+                        <span class="moon">🌙</span>
+                    </label>
+                </div>
+            </div>
+
+
+
+
+                <!-- Enlace directo a la página de Clima -->
+                <a class="navbar-brand" href="/Clima">Clima</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Home/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Home/Privacy">settings</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - Fidee - <a href="/Home/Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+@* Aqui empieza el cambio en el script*@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+            document.body.classList.add(savedTheme);
+            if (savedTheme === "dark-theme") {
+                document.getElementById("themeToggle").checked = true;
+            }
+        }
+    });
+
+    function toggleTheme() {
+        const body = document.body;
+        body.classList.toggle("dark-theme");
+
+        // Guardar el tema seleccionado
+        if (body.classList.contains("dark-theme")) {
+            localStorage.setItem("theme", "dark-theme");
+        } else {
+            localStorage.removeItem("theme");
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

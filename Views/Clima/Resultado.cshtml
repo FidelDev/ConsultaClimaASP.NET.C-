@@ -1,0 +1,23 @@
+﻿@model Clima.Models.ClimaModel
+
+<h2>Clima en @Model.Name</h2>
+
+@if (Model.Main != null)
+{
+    <p>Temperatura: @Model.Main.Temp °C</p>
+}
+else
+{
+    <p>No se pudo obtener la temperatura.</p>
+}
+
+@if (Model.Weather != null && Model.Weather.Length > 0)
+{
+    <p>Estado: @Model.Weather[0].Description</p>
+}
+else
+{
+    <p>No se pudo obtener el estado del clima.</p>
+}
+
+<a href="/Clima" class="btn btn-primary">Consultar otra ciudad</a>

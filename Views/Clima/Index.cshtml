@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Consulta de Clima";
+}
+
+<div class="d-flex flex-column justify-content-center align-items-center" style="height: 75vh;">
+    <h2 class="mb-4">Consulta de Clima</h2>
+    
+    <form asp-action="ConsultarClima" method="post" class="w-50">
+        <div class="mb-3 d-flex flex-column align-items-center">
+            <input type="text" name="ciudad" class="form-control form-control-lg w-100 mb-2" placeholder="Ingrese una ciudad" required />
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 40%;">Consultar Clima</button>
+        </div>
+    </form>
+</div>
+
+
+@if (ViewBag.Error != null)
+{
+   @*  <div>class="mt-4 text-center"</div> *@
+    <div class="alert alert-danger mt-2">@ViewBag.Error</div>
+}
+
